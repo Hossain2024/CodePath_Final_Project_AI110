@@ -42,9 +42,58 @@ Planner
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
-
+The scheduler considers these contrains:
+- Available time: The total amount of time the owner has for pet care in a day. Tasks are only added if they fit within this limit.
+- Task duration: Each task has a time requirement, which affects whether it can be included in the schedule.
+- Task frequency: Only tasks marked as "daily" are considered when generating the daily schedule.
+- Completion status: Incomplete tasks are prioritized over completed ones to ensure essential care is not missed.
 **b. Tradeoffs**
 
-- Describe one tradeoff your sched
+- Describe one tradeoff your scheduler makes.
+- Why is that tradeoff reasonable for this scenario?
+
+---
+
+## 3. AI Collaboration
+
+**a. How you used AI**
+
+- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
+
+- I used AI to refactor some of the code & bransorm ideas
+- What kinds of prompts or questions were most helpful?
+
+**b. Judgment and verification**
+
+- Describe one moment where you did not accept an AI suggestion as-is.
+    - one time i didn't use AI as is when the AI generated UML diagram . I changes some of the things and asked for explanation before proceeding 
+- How did you evaluate or verify what the AI suggested?
+    - I evaluated AI sugestion based on my vision and my knowledge of UML 
+---
+
+## 4. Testing and Verification
+
+**a. What you tested**
+
+- What behaviors did you test?
+- Why were these tests important?
+
+**b. Confidence**
+
+- How confident are you that your scheduler works correctly?
+- What edge cases would you test next if you had more time?
+
+---
+
+## 5. Reflection
+
+**a. What went well**
+
+- I was most satisfied with the UML diagram because it made it easier stay organized during my implementation
+**b. What you would improve**
+
+if i had another itteration I would add is support for multiple pets in the same schedule, allowing the owner to see and manage tasks for all their pets at once. This would make the app more practical for users with more than one pet and improve overall usability
+
+**c. Key takeaway**
+
+One important thing I learned from this project is the importance of evaluating AI-generated solutions critically. AI can help quickly generate ideas or boilerplate code, but it is essential to review, test, and adapt these suggestions to fit the specific requirements of the system. This process reinforced my understanding of designing systems thoughtfully and making tradeoffs between simplicity, usability, and functionality. 
