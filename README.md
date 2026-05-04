@@ -53,7 +53,8 @@ The system is organized into modular components:
 User Input → Task Creation → Owner/Pet Storage → Scheduler → AIPlanner → Schedule + Explanation
 
 ---
-
+## demo
+https://www.loom.com/share/ef55eebf4374420d9d41b1beec3342c3
 ## Setup
 
 ```bash
@@ -70,6 +71,3 @@ pip install -r requirements.txt
 
 # Run the app
 streamlit run app.py
-
-
-https://www.loom.com/share/ef55eebf4374420d9d41b1beec3342c3
