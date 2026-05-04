@@ -1,6 +1,6 @@
 import streamlit as st
 from pawpal_system import Owner, Pet, Task, Scheduler
-
+from pawpal_system import AIPlanner
 st.set_page_config(page_title="PawPal+", page_icon="🐾", layout="centered")
 
 st.title("🐾 PawPal+")
@@ -121,12 +121,14 @@ available_time = st.number_input(
 # -------------------------
 # GENERATE SCHEDULE (UPDATED)
 # -------------------------
-if st.button("Generate schedule"):
+if st.button("Generate AI schedule"):
+
     scheduler = Scheduler(st.session_state.owner)
+    ai = AIPlanner(scheduler)
 
-    plan = scheduler.generate_daily_schedule(available_time)
+    plan, reasoning = ai.generate_ai_schedule(available_time)
 
-    st.subheader("🐾 Today's Schedule")
+    st.subheader("🐾 AI Generated Schedule")
 
     if not plan:
         st.warning("No tasks could be scheduled.")
@@ -135,6 +137,6 @@ if st.button("Generate schedule"):
             status = "✅ Done" if task.completed else "⏳ Pending"
             st.write(f"- {task.description} ({task.time} min) {status}")
 
-        st.divider()
-        st.subheader("Explanation")
-        st.text(scheduler.summarize_schedule(plan))
+    st.divider()
+    st.subheader("🧠 AI Explanation")
+    st.text(ai.explain_plan(plan, reasoning))

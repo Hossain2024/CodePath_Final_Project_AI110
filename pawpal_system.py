@@ -136,3 +136,88 @@ class Scheduler:
             summary.append(f"- {task.description} ({task.time} min) [{status}]")
 
         return "\n".join(summary)
+# -------------------------
+# AI PLANNER (Agent Layer)
+# -------------------------
+class AIPlanner:
+    """
+    This turns PawPal+ into an AI-style assistant.
+    It decides what to do first, why, and what to skip.
+    """
+
+    def __init__(self, scheduler: Scheduler):
+        self.scheduler = scheduler
+
+    def prioritize_tasks(self, tasks: List[Task]) -> List[Task]:
+        """
+        AI-like prioritization:
+        1. High priority first (we infer from completed + time urgency proxy)
+        2. Short tasks first if tie (efficiency bias)
+        """
+
+        def score(task: Task):
+            priority_score = 0
+
+            # incomplete tasks are higher priority
+            if not task.completed:
+                priority_score += 2
+
+            # shorter tasks slightly preferred (efficiency)
+            priority_score += max(0, 100 - task.time)
+
+            return priority_score
+
+        return sorted(tasks, key=score, reverse=True)
+
+    def generate_ai_schedule(self, available_time: int):
+        """
+        AI-driven scheduling:
+        - Gets tasks
+        - Prioritizes them
+        - Builds optimized plan
+        - Explains decisions
+        """
+
+        tasks = self.scheduler.get_tasks_by_frequency("daily")
+        ordered_tasks = self.prioritize_tasks(tasks)
+
+        schedule = []
+        time_used = 0
+        reasoning = []
+
+        for task in ordered_tasks:
+            if time_used + task.time <= available_time:
+                schedule.append(task)
+                time_used += task.time
+
+                reasoning.append(
+                    f"✔ Included '{task.description}' "
+                    f"(priority decision: high relevance + fits time window)"
+                )
+            else:
+                reasoning.append(
+                    f"✖ Skipped '{task.description}' "
+                    f"(not enough time left or lower priority)"
+                )
+
+        return schedule, reasoning
+
+    def explain_plan(self, schedule: List[Task], reasoning: List[str]) -> str:
+        """
+        Converts AI decisions into human-readable explanation.
+        """
+
+        if not schedule:
+            return "No tasks selected by AI planner."
+
+        summary = []
+        total_time = sum(t.time for t in schedule)
+
+        summary.append("🧠 AI PLAN EXPLANATION\n")
+        summary.append(f"Selected {len(schedule)} tasks")
+        summary.append(f"Total time used: {total_time} minutes\n")
+
+        summary.append("Decision Trace:")
+        summary.extend(reasoning)
+
+        return "\n".join(summary)
