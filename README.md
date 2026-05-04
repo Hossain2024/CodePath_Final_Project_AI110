@@ -1,47 +1,74 @@
-# PawPal+ (Module 2 Project)
+# 🐾 PawPal+ AI (Final Project)
 
-You are building **PawPal+**, a Streamlit app that helps a pet owner plan care tasks for their pet.
+PawPal+ AI is a Streamlit-based pet care assistant that helps owners plan and prioritize daily tasks for their pets using AI-style decision-making logic.
+
+---
+
+## Original Project (Module 2)
+
+This project is an extension of my **PawPal+ (Module 2 Project)**, which focused on building a basic pet care scheduling system using Python and object-oriented programming.
+
+The original system allowed users to create pets, assign tasks (such as feeding or walking), and generate a simple daily schedule based on available time. It demonstrated foundational OOP design and basic scheduling logic.
+
+---
 
 ## Scenario
 
 A busy pet owner needs help staying consistent with pet care. They want an assistant that can:
 
-- Track pet care tasks (walks, feeding, meds, enrichment, grooming, etc.)
-- Consider constraints (time available, priority, owner preferences)
-- Produce a daily plan and explain why it chose that plan
+- Track pet care tasks (walks, feeding, medications, grooming, etc.)
+- Consider constraints such as time availability and task importance
+- Automatically generate a daily plan
+- Explain why certain tasks were selected or skipped
 
-Your job is to design the system first (UML), then implement the logic in Python, then connect it to the Streamlit UI.
+PawPal+ AI extends this idea by acting as an intelligent assistant that makes scheduling decisions and explains its reasoning.
 
-## What you will build
+---
 
-Your final app should:
+## What this system does
 
-- Let a user enter basic owner + pet info
-- Let a user add/edit tasks (duration + priority at minimum)
-- Generate a daily schedule/plan based on constraints and priorities
-- Display the plan clearly (and ideally explain the reasoning)
-- Include tests for the most important scheduling behaviors
+This system:
 
-## Getting started
+- Represents pet care tasks with duration and frequency
+- Stores pets and owners using object-oriented design
+- Generates a daily schedule based on time constraints
+- Prioritizes tasks using AI-style logic
+- Explains scheduling decisions in a transparent way
 
-### Setup
+---
+
+## Architecture Overview
+
+The system is organized into modular components:
+
+- **Owner**: Manages pets and aggregates all tasks  
+- **Pet**: Stores pet information and associated tasks  
+- **Task**: Represents individual care activities  
+- **Scheduler**: Filters and prepares tasks  
+- **AIPlanner**: Applies decision-making logic to prioritize and schedule tasks  
+- **Streamlit UI**: Handles user interaction  
+
+### Data Flow
+
+User Input → Task Creation → Owner/Pet Storage → Scheduler → AIPlanner → Schedule + Explanation
+
+---
+
+## Setup
 
 ```bash
+# Clone repository
+git clone <your-repo-url>
+cd <your-repo-folder>
+
+# Create virtual environment
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-```
 
-### Suggested workflow
-
-1. Read the scenario carefully and identify requirements and edge cases.
-2. Draft a UML diagram (classes, attributes, methods, relationships).
-3. Convert UML into Python class stubs (no logic yet).
-4. Implement scheduling logic in small increments.
-5. Add tests to verify key behaviors.
-6. Connect your logic to the Streamlit UI in `app.py`.
-7. Refine UML so it matches what you actually built.
-
+# Run the app
+streamlit run app.py
 ### Demo
-![alt text](image.png)
-![alt text](image-1.png)
+https://www.loom.com/share/ef55eebf4374420d9d41b1beec3342c3
